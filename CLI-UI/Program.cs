@@ -18,6 +18,14 @@ using System.Diagnostics;
 
 class Program
 {
+
+    readonly static string about = @"
+    CLI-UI - A simple command-line interface for browsing files and directories
+    Version 1.0.0
+    Copyright(C) 2025 Luke Zhang
+    GitHub: github.com/win-lukezhang/CLI-UI
+    ";
+
     static void Main(string[] args)
     {
         const int itemsPerPage = 22;
@@ -50,6 +58,8 @@ class Program
 
                 Console.WriteLine("====================================");
                 Console.WriteLine("使用方向键选择驱动器，空格或 Enter 打开，Esc 退出");
+                Console.WriteLine("====================================");
+                Console.WriteLine("按下 A 获取关于信息，按下 S 尝试关机");
 
                 var key = Console.ReadKey(true).Key;
 
@@ -69,6 +79,20 @@ class Program
                         break;
                     case ConsoleKey.Escape:
                         return;
+                    case ConsoleKey.A:
+                        Console.Clear();
+                        Console.WriteLine(about);
+                        Console.WriteLine("按任意键返回...");
+                        Console.ReadKey();
+                        break;
+                    case ConsoleKey.S:
+                        Console.Clear();
+                        Console.WriteLine("你确定要关机吗？(Y/N)");
+                        if (Console.ReadKey(true).Key == ConsoleKey.Y)
+                        {
+                            return;
+                        }
+                        break;
                 }
             }
             else
