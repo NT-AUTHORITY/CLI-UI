@@ -1,2 +1,2 @@
 # CLI-UI
- A simple command-line interface for browsing files and directories.
+ A ~~simple~~ USELESS command-line interface for browsing files and directories.
