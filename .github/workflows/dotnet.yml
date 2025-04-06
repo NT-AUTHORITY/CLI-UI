@@ -1,0 +1,39 @@
+name: Build and Package CLI-UI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore NuGet packages
+      run: dotnet restore CLI-UI.sln
+
+    - name: Build solution
+      run: dotnet build CLI-UI.sln --configuration Release --no-restore
+
+    - name: Package output into ZIP
+      run: |
+        mkdir artifacts
+        Compress-Archive -Path ./CLI-UI/bin/Release/* -DestinationPath ./artifacts/CLI-UI.zip
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: CLI-UI
+        path: artifacts/CLI-UI.zip
