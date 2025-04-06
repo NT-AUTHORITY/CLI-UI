@@ -33,7 +33,7 @@ jobs:
         Compress-Archive -Path ./CLI-UI/bin/Release/* -DestinationPath ./artifacts/CLI-UI.zip
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: CLI-UI
         path: artifacts/CLI-UI.zip
